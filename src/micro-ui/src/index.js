@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'toastr/build/toastr.min.css';
 import 'font-awesome/css/font-awesome.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
-
+import initialState from './reducer/initialState'
 import App from './components/App';
 import './index.css';
 //import registerServiceWorker from './registerServiceWorker';
@@ -20,11 +20,8 @@ import './index.css';
 
 const store= createStore(
     rootReducer,
-    compose(
-        applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-    
+    initialState,
+    applyMiddleware(thunk)
 );
 
 
