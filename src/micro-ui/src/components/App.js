@@ -28,7 +28,7 @@ const App = () => {
                         <HeaderNavContainer />
                         <Navbar />
                         <Switch>
-                            <SecureRoute exact path="/" component={Home} />
+                            <Route exact path="/" component={Home} />
                             <Route path="/implicit/callback" component={ImplicitCallback} />
                             <SecureRoute path="/courses" component={CourseListContainer} />
                             <SecureRoute exact path="/course" component={AddOrEditCourseContainer} />
