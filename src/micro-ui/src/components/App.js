@@ -10,7 +10,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import HeaderNavContainer from './landing/HeaderNavContainer'; // eslint-disable-line import/no-named-as-default
 import config from '../.samples.config';
 import Navbar from '../Navbar';
-
+import Profile from './Profile'
 const history = createBrowserHistory();
 
 
@@ -26,13 +26,12 @@ const App = () => {
                     <div>
 
                         <HeaderNavContainer />
-                        <Navbar />
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/implicit/callback" component={ImplicitCallback} />
                             <SecureRoute path="/courses" component={CourseListContainer} />
                             <SecureRoute exact path="/course" component={AddOrEditCourseContainer} />
-                          
+                            <SecureRoute path="/profile" component={Profile} /> 
                             <SecureRoute path="/about" component={About} />
                             <Route component={PageNotFound} />
                         </Switch>
