@@ -4,12 +4,14 @@ import coursesReducer from './coursesReducer';
 import selectedCourseReducer from './selectedCourseReducer';
 import authorReducer from './authorReducer';
 import apiReducer from './apiReducer';
+import authReducer from './authReducer';
 
 export default combineReducers({
     coursesReducer,
     selectedCourseReducer,
     authorReducer,
     apiReducer,
+    authReducer,
     form: formReducer    
 });
 

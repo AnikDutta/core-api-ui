@@ -15,6 +15,11 @@ export default {
 
     apiReducer: {
         apiCallsInProgress: 0
+    },
+
+    authReducer: {
+        authenticated : false,
+        userinfo : null
     }
 
 };

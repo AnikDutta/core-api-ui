@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import * as courseAction from '../../action/CourseAction';
+import * as authAction from '../../action/AuthAction';
 import CourseList from './CourseList';
 import { withAuth } from '@okta/okta-react';
-import { checkAuthentication } from '../../helpers';
+import authService from '../../service/AuthService';
 
 
 export class CourseListContainer extends React.Component {
 
     constructor() {
         super();
-        this.state = {selectedCourseId: undefined,authenticated: null };
-        this.checkAuthentication = checkAuthentication.bind(this);
+        this.state = {selectedCourseId: undefined};
+       // this.checkAuthentication = checkAuthentication.bind(this);
         this.handleAddCourse = this.handleAddCourse.bind(this);
         this.handleEditCourse = this.handleEditCourse.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -23,14 +24,16 @@ export class CourseListContainer extends React.Component {
 
 
     async componentDidMount() {
+        this.props.action.checkAuthentication(this.props.auth);
+        console.log(`auth service log`, authService);
         this.props.action.getCoursesAction()
             .catch(error => {
                 toastr.error(error);
             });
-        this.checkAuthentication();
+        //this.checkAuthentication();
     }
     async componentDidUpdate() {
-        this.checkAuthentication();
+        //this.checkAuthentication();
     }
 
     handleAddCourse() {
@@ -132,13 +135,15 @@ export class CourseListContainer extends React.Component {
 
 
 const mapStateToProps = state => ({
-    courses: state.coursesReducer.courses
+    courses: state.coursesReducer.courses,
+    authenticated : state.authReducer.authenticated,
+    userinfo : state.authReducer.userinfo
 });
 
 
 
-const mapDispatchToProps = dispatch => ({
-    action: bindActionCreators(courseAction, dispatch)
+const mapDispatchToProps = (dispatch) => ({
+    action: bindActionCreators({...courseAction, ...authAction}, dispatch)
 
 });
 
@@ -147,7 +152,9 @@ const mapDispatchToProps = dispatch => ({
 CourseListContainer.propTypes = {
     courses: PropTypes.array,
     action: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    userinfo: PropTypes.array,
+    authenticated: PropTypes.bool.isRequired
 };
 
 
