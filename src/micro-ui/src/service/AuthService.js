@@ -1,32 +1,17 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authAction from '../action/AuthAction';
+import {checkAuthentication} from '../action/AuthAction';
 
-export class AuthService{
-    constructor(){
-        
+function authMiddleware() {
+    return ({ dispatch, getState }) => next => action => {
+      console.log('anik dutta');
+      if (action.type == 'API_CALL_BEGIN') {
+        //checkAuthentication(action.auth);
+        console.log(`middle ware action type`, action);
+      }
+      return next(action);
     }
-}
-
-AuthService.propTypes = {
-    action: PropTypes.object.isRequired,
-    userinfo: PropTypes.object.isRequired,
-    authenticated: PropTypes.bool.isRequired
-};
-
-
-const mapStateToProps = state => ({
-    authenticated : state.authReducer.authenticated,
-    userinfo : state.authReducer.userinfo
-});
-
-
-
-const mapDispatchToProps = (dispatch) => ({
-    action: bindActionCreators(authAction, dispatch)
-});
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthService);
+  }
+  
+export const authMiddlewareConst = authMiddleware();

@@ -23,7 +23,7 @@ export function checkAuthentication(authService) {
             }
         }
 
-        
+        console.log(`State ---`,getState());
     }
   }
   

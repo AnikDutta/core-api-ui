@@ -1,24 +1,27 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Section from './Section';
 import Footer from './Footer';
 import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../../helpers';
 import { Button, Header } from 'semantic-ui-react';
 
-export default withAuth(class Home extends React.Component {
+class Home extends React.Component {
     constructor(props) {
       super(props);
-      this.state = { authenticated: null, userinfo: null };
-      this.checkAuthentication = checkAuthentication.bind(this);
+      //this.state = { authenticated: null, userinfo: null };
+      //this.checkAuthentication = checkAuthentication.bind(this);
       this.login = this.login.bind(this);
     }
   
     async componentDidMount() {
-      this.checkAuthentication();
+      
     }
   
     async componentDidUpdate() {
-      this.checkAuthentication();
+      
     }
   
     async login() {
@@ -28,12 +31,12 @@ export default withAuth(class Home extends React.Component {
     render() {
         return (
              <div>
-        {this.state.authenticated !== null &&
+        {this.props.authenticated !== null &&
         <div>
           <Header as="h1">Implicit Flow w/ Okta Hosted Login Page</Header>
-          {this.state.authenticated &&
+          {this.props.authenticated &&
             <div>
-              <p>Welcome back, {this.state.userinfo.name}!</p>
+              <p>Welcome back, {this.props.userinfo.name}!</p>
               <p>
                 You have successfully authenticated against your Okta org, and have been redirected back to this application.  You now have an ID token and access token in local storage.
                 Visit the <a href="/profile">My Profile</a> page to take a look inside the ID token.
@@ -45,7 +48,7 @@ export default withAuth(class Home extends React.Component {
               <p>Once you have downloaded and started the example resource server, you can visit the <a href="/messages">My Messages</a> page to see the authentication process in action.</p>
             </div>
           }
-          {!this.state.authenticated &&
+          {!this.props.authenticated &&
             <div>
               <p>If you&lsquo;re viewing this page then you have successfully started this React application.</p>
              
@@ -62,4 +65,25 @@ export default withAuth(class Home extends React.Component {
       </div>
         );
     }
-  });
+}
+const mapStateToProps = state => ({
+  authenticated : state.authReducer.authenticated,
+  userinfo : state.authReducer.userinfo
+});
+
+
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+
+
+Home.propTypes = {
+  userinfo: PropTypes.array,
+  authenticated: PropTypes.bool.isRequired
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Home));

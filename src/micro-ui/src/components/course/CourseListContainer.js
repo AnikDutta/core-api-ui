@@ -7,7 +7,6 @@ import * as courseAction from '../../action/CourseAction';
 import * as authAction from '../../action/AuthAction';
 import CourseList from './CourseList';
 import { withAuth } from '@okta/okta-react';
-import authService from '../../service/AuthService';
 
 
 export class CourseListContainer extends React.Component {
@@ -24,8 +23,8 @@ export class CourseListContainer extends React.Component {
 
 
     async componentDidMount() {
-        this.props.action.checkAuthentication(this.props.auth);
-        console.log(`auth service log`, authService);
+        //this.props.action.checkAuthentication(this.props.auth);
+        console.log(`Userinfo did mount courseList`, this.props.userinfo);
         this.props.action.getCoursesAction()
             .catch(error => {
                 toastr.error(error);
