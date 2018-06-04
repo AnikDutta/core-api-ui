@@ -10,24 +10,15 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import HeaderNavContainer from './landing/HeaderNavContainer'; // eslint-disable-line import/no-named-as-default
 import config from '../.samples.config';
 import Navbar from '../Navbar';
-import Profile from './Profile'
-import store from '../store/store';
-import {checkAuthentication} from '../action/AuthAction';
+
 const history = createBrowserHistory();
-const _auth = new Auth({
-    issuer:config.oidc.issuer,
-    client_id:config.oidc.clientId,
-    redirect_uri:config.oidc.redirectUri
-})
 class App extends React.Component{
     constructor(){
         super();
     }
 
     async componentDidMount() {
-        //this.props.action.checkAuthentication(this.props.auth);
-        await store.dispatch(checkAuthentication(_auth));
-        console.log(`APP did Mount`,store.getState().authReducer);
+        
     }
 
     async componentDidUpdate() {
@@ -47,13 +38,10 @@ class App extends React.Component{
     
                             <HeaderNavContainer />
                             <Switch>
-                                <Route exact path="/" component={Home} />
+                                <SecureRoute exact path="/" component={CourseListContainer} />
                                 <Route path="/implicit/callback" component={ImplicitCallback} />
-                                <SecureRoute path="/courses" component={CourseListContainer} />
-                                <SecureRoute exact path="/course" component={AddOrEditCourseContainer} />
-                                <SecureRoute path="/profile" component={Profile} /> 
-                                <SecureRoute path="/about" component={About} />
-                                <Route component={PageNotFound} />
+                                <SecureRoute exact path="/add_edit/:id" component={AddOrEditCourseContainer} />
+                                <Route component={CourseListContainer} />
                             </Switch>
     
                         </div>

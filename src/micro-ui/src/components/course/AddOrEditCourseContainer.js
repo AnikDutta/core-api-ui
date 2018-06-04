@@ -16,15 +16,13 @@ export class AddOrEditCourseContainer extends React.Component {
 
     constructor() {
         super();
-        this.state = {authenticated: null };
         this.handleSave = this.handleSave.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
-        this.checkAuthentication = checkAuthentication.bind(this);
     }
 
 
 
-    async componentDidMount() {
+     componentDidMount() {
         this.props.action.getCourseAction(this.props.match.params.id)
             .catch(error => {
                 toastr.error(error);
@@ -34,11 +32,11 @@ export class AddOrEditCourseContainer extends React.Component {
             .catch(error => {
                 toastr.error(error);
             });
-        this.checkAuthentication();
+        
     }
 
-    async componentDidUpdate() {
-        this.checkAuthentication();
+    componentDidUpdate() {
+        
     }
 
     handleSave(values) {

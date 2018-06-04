@@ -23,20 +23,18 @@ export class CourseListContainer extends React.Component {
 
 
     async componentDidMount() {
-        //this.props.action.checkAuthentication(this.props.auth);
-        console.log(`Userinfo did mount courseList`, this.props.userinfo);
+        await this.props.action.checkAuthentication(this.props.auth);
         this.props.action.getCoursesAction()
             .catch(error => {
                 toastr.error(error);
             });
-        //this.checkAuthentication();
     }
     async componentDidUpdate() {
-        //this.checkAuthentication();
+
     }
 
     handleAddCourse() {
-        this.props.history.push('/course');
+        this.props.history.push('/add_edit');
     }
 
 
@@ -46,7 +44,7 @@ export class CourseListContainer extends React.Component {
 
         if (selectedCourseId) {
             this.setState({selectedCourseId: undefined});            
-            this.props.history.push(`/course/${selectedCourseId}`);
+            this.props.history.push(`/add_edit/${selectedCourseId}`);
         }        
     }
 
