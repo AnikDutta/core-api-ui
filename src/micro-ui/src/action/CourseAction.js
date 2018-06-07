@@ -17,8 +17,8 @@ export function getCoursesAction() {
         dispatch(ApiCallBeginAction());
 
         return CourseApi.getAllCourses()
-            .then(courses => {
-                dispatch(getCoursesResponse(courses));
+            .then(res => {
+                dispatch(getCoursesResponse(res.data));
             }).catch(error => {
                 throw error;
             });

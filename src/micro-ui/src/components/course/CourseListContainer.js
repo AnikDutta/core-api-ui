@@ -25,9 +25,9 @@ export class CourseListContainer extends React.Component {
     async componentDidMount() {
         await this.props.action.checkAuthentication(this.props.auth);
         this.props.action.getCoursesAction()
-            .catch(error => {
-                toastr.error(error);
-            });
+        .catch(error => {
+            toastr.error(error);
+        });
     }
     async componentDidUpdate() {
 
