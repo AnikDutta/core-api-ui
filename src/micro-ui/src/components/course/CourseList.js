@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import BootstrapTable from 'react-bootstrap-table-next'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';;
 
 
 
@@ -48,17 +49,47 @@ class CourseList extends React.Component {
             hideSelectColumn: true            
         };
     }
-
+    actionFormatter = (cell, row, rowIndex, formatExtraData) => {
+        return (<div><button onClick={this.handleEditCourse(row.id)}>Edit</button><button>Delete</button></div>);
+    };
+    handleEditCourse = (selectedCourseId) => (e) => {
+        //const selectedCourseId = this.state.selectedCourseId;
+        console.log(`selected course id`,selectedCourseId)
+        if (selectedCourseId) {
+           // this.setState({selectedCourseId: undefined});            
+            //this.props.history.push(`/add_edit/${selectedCourseId}`);
+        }        
+    }
 
 
     render() {
-
+        const columns = [{
+                    dataField: 'id',
+                    text: 'ID',
+                    hidden: true
+                }, {
+                    dataField: 'title',
+                    text: 'Title'
+                }, {
+                    dataField: 'length',
+                    text: 'Length'
+                 },{
+                    dataField: 'category',
+                    text: 'Category'
+                 },{
+                    dataField: 'authorId',
+                    text: 'Author'
+                 },{
+                    dataField: '',
+                    text: 'Actions',
+                    formatter : this.actionFormatter 
+                 }];
 
         return (
-            <BootstrapTable data={this.props.courses}  selectRow={this.selectRowProp}  options={this.options} bordered={false} striped hover condensed>
-                <TableHeaderColumn dataField="id" isKey hidden>Id</TableHeaderColumn>
+            <BootstrapTable data={this.props.courses} columns={columns} keyField="id" bordered={false} striped condensed />
+               
                 
-                <TableHeaderColumn 
+               /*<TableHeaderColumn 
                     dataField="title"
                     dataFormat={titleFormatter} 
                     dataSort={true}
@@ -96,8 +127,7 @@ class CourseList extends React.Component {
                     columnTitle
                 >
                     Author
-                </TableHeaderColumn>                                
-            </BootstrapTable>
+                </TableHeaderColumn>  */  
         );
     }
 
