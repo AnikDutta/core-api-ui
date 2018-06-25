@@ -14,11 +14,6 @@ export class CourseListContainer extends React.Component {
     constructor() {
         super();
         this.state = {selectedCourseId: undefined};
-       // this.checkAuthentication = checkAuthentication.bind(this);
-        this.handleAddCourse = this.handleAddCourse.bind(this);
-        this.handleEditCourse = this.handleEditCourse.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleRowSelect = this.handleRowSelect.bind(this);
     }
 
 
@@ -33,48 +28,27 @@ export class CourseListContainer extends React.Component {
 
     }
 
-    handleAddCourse() {
+    handleAddCourse=()=>{
         this.props.history.push('/add_edit');
     }
 
 
-
-    handleEditCourse() {
-        const selectedCourseId = this.state.selectedCourseId;
-
+    handleDelete = (selectedCourseId) => {
         if (selectedCourseId) {
-            this.setState({selectedCourseId: undefined});            
-            this.props.history.push(`/add_edit/${selectedCourseId}`);
-        }        
-    }
-
-
-
-    handleDelete() {
-        const selectedCourseId = this.state.selectedCourseId;
-
-        if (selectedCourseId) {
-            this.setState({selectedCourseId: undefined});                        
             this.props.action.deleteCourseAction(selectedCourseId)
+                .then(()=>{
+                    console.log(`Course List after delete in then`,this.props.courses);
+                    })
                 .catch(error => {
                     toastr.error(error);
                 });
         }
+        console.log(`Course List after delete`,this.props.courses);
     }
-
-
-
-    handleRowSelect(row, isSelected) {
-        if (isSelected) {
-            this.setState({selectedCourseId: row.id});
-        }
-    }
-
-
 
     render() {
         const { courses } = this.props;
-
+        console.log(`Course List after Render`,this.props.courses);
         if (!courses) {
             return (
                 <div>Loading...</div>
@@ -99,29 +73,13 @@ export class CourseListContainer extends React.Component {
                             >
                                 <i className="fa fa-plus" aria-hidden="true"/> New
                             </button>
-
-                            <button
-                                type="button"
-                                className="btn btn-warning ml-2"
-                                onClick={this.handleEditCourse}                                
-                            >
-                                <i className="fa fa-pencil" aria-hidden="true"/> Edit
-                            </button>                                
-
-                            <button
-                                type="button"
-                                className="btn btn-danger ml-2"
-                                onClick={this.handleDelete}
-                            >
-                                <i className="fa fa-trash-o" aria-hidden="true" onClick={this.handleDelete}/> Delete
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div className="row">
                     <div className="col">
-                        <CourseList courses={courses} handleRowSelect={this.handleRowSelect}/>
+                        <CourseList courses={courses} handleDelete = {this.handleDelete}/>
                     </div>
                 </div>
             </div>

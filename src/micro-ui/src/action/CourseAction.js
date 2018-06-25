@@ -1,5 +1,6 @@
 import * as ActionType from './ActionType';
 import CourseApi from '../api/CourseApi';
+import _ from 'lodash';
 import { ApiCallBeginAction, ApiCallErrorAction } from './ApiAction';
 
 
@@ -18,7 +19,8 @@ export function getCoursesAction() {
 
         return CourseApi.getAllCourses()
             .then(res => {
-                dispatch(getCoursesResponse(res.data));
+                let listArray = [...res.data];
+                dispatch(getCoursesResponse(listArray));
             }).catch(error => {
                 throw error;
             });

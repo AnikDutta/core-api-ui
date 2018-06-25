@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';;
@@ -50,16 +51,23 @@ class CourseList extends React.Component {
         };
     }
     actionFormatter = (cell, row, rowIndex, formatExtraData) => {
-        return (<div><button onClick={this.handleEditCourse(row.id)}>Edit</button><button>Delete</button></div>);
+        return (<div><button onClick={this.handleEdit(row.id)}>Edit</button>
+        <button onClick={this.handleDelete(row.id)}>Delete</button></div>);
     };
-    handleEditCourse = (selectedCourseId) => (e) => {
-        //const selectedCourseId = this.state.selectedCourseId;
-        console.log(`selected course id`,selectedCourseId)
+    handleEdit = (selectedCourseId) => (e) => {
         if (selectedCourseId) {
-           // this.setState({selectedCourseId: undefined});            
-            //this.props.history.push(`/add_edit/${selectedCourseId}`);
+           this.props.history.push(`/add_edit/${selectedCourseId}`);
         }        
     }
+    
+    handleDelete= (selectedCourseId) => (e) => {
+        if(selectedCourseId){
+            this.props.handleDelete(selectedCourseId);
+        }
+    }
+    /*static contextTypes = {
+        router: PropTypes.object
+    }*/
 
 
     render() {
@@ -142,4 +150,4 @@ CourseList.propTypes = {
 
 
 
-export default CourseList;
+export default withRouter(CourseList);
