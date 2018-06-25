@@ -8,8 +8,6 @@ import * as authorAction from '../../action/AuthorAction';
 import CourseForm from './CourseForm'; // eslint-disable-line import/no-named-as-default
 import { authorsFormattedForDropdown } from '../../selectors/selectors'; // eslint-disable-line import/no-named-as-default
 import { withAuth } from '@okta/okta-react';
-import { checkAuthentication } from '../../helpers';
-
 
 export class AddOrEditCourseContainer extends React.Component {
 

@@ -1,6 +1,5 @@
 import * as ActionType from './ActionType';
 import CourseApi from '../api/CourseApi';
-import _ from 'lodash';
 import { ApiCallBeginAction, ApiCallErrorAction } from './ApiAction';
 
 

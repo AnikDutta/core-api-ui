@@ -1,22 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Security, SecureRoute, ImplicitCallback, Auth } from '@okta/okta-react';
-import PageNotFound from './common/PageNotFound';
-import Home from './landing/Home';
+import { Router, Route, Switch } from 'react-router-dom';
+import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import CourseListContainer from './course/CourseListContainer'; // eslint-disable-line import/no-named-as-default
 import AddOrEditCourseContainer from './course/AddOrEditCourseContainer'; // eslint-disable-line import/no-named-as-default
-import About from './About';
 import createBrowserHistory from 'history/createBrowserHistory';
 import HeaderNavContainer from './landing/HeaderNavContainer'; // eslint-disable-line import/no-named-as-default
 import config from '../.samples.config';
-import Navbar from '../Navbar';
 
 const history = createBrowserHistory();
 class App extends React.Component{
-    constructor(){
-        super();
-    }
-
+ 
     async componentDidMount() {
         
     }

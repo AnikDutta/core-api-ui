@@ -144,8 +144,7 @@ class CourseList extends React.Component {
 
 
 CourseList.propTypes = {
-    courses: PropTypes.array.isRequired,
-    handleRowSelect: PropTypes.func.isRequired
+    courses: PropTypes.array.isRequired
 };
 
 

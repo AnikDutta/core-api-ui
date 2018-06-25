@@ -1,7 +1,7 @@
 import * as ActionType from './ActionType';
-import AuthorApi from '../api/AuthorApi';
-import { ApiCallBeginAction } from './ApiAction';
-import store from '../store/store';
+//import AuthorApi from '../api/AuthorApi';
+//import { ApiCallBeginAction } from './ApiAction';
+//import store from '../store/store';
 
 
 

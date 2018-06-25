@@ -1,8 +1,5 @@
 import * as ActionType from '../action/ActionType';
 import initialState from './initialState';
-import _ from 'lodash';
-
-
 
 const authReducer = (state = initialState.authReducer, action) => {
     switch(action.type) {
