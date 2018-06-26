@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next'
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';;
 
 
@@ -73,25 +74,24 @@ class CourseList extends React.Component {
        
         let dataList =  this.props.courses, dataFields, columns = [{
             dataField: '',
-            text: 'Actions',
+            text: 'ACTION',
             formatter : this.actionFormatter 
          }];
         if(dataList && dataList.length){
             dataFields = Object.keys(dataList[0]);
         }
         if(dataFields){
-           
             columns=[...(dataFields.map(dataField=>{
-                    return {'dataField': dataField, 'text': dataField}
+                    return {'dataField': dataField, 'text': dataField.toUpperCase()}
                 })), {
-                dataField: '',
-                text: 'Actions',
-                formatter : this.actionFormatter 
-             }];
+                    dataField: '',
+                    text: 'ACTION',
+                    formatter : this.actionFormatter 
+                }];
         }
 
         return (
-            <BootstrapTable data={this.props.courses} columns={columns} keyField="id" bordered={false} striped condensed />
+            <BootstrapTable data={this.props.courses} columns={columns} keyField="id" bordered={false} striped condensed pagination={ paginationFactory()} />
                
                 
                /*<TableHeaderColumn 
