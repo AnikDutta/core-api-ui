@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import CourseListContainer from './course/CourseListContainer'; // eslint-disable-line import/no-named-as-default
-import AddOrEditCourseContainer from './course/AddOrEditCourseContainer'; // eslint-disable-line import/no-named-as-default
+import AddCourseContainer from './course/AddCourseContainer'; // eslint-disable-line import/no-named-as-default
 import createBrowserHistory from 'history/createBrowserHistory';
 import HeaderNavContainer from './landing/HeaderNavContainer'; // eslint-disable-line import/no-named-as-default
 import config from '../.samples.config';
@@ -33,8 +33,8 @@ class App extends React.Component{
                             <Switch>
                                 <SecureRoute exact path="/" component={CourseListContainer} />
                                 <Route path="/implicit/callback" component={ImplicitCallback} />
-                                <SecureRoute exact path="/add_edit" component={AddOrEditCourseContainer} />
-                                <SecureRoute path="/add_edit/:id" component={AddOrEditCourseContainer} />
+                                <SecureRoute exact path="/add_edit" component={AddCourseContainer} />
+                                <SecureRoute path="/add_edit/:id" component={AddCourseContainer} />
                                 <SecureRoute component={CourseListContainer} />
                             </Switch>
     

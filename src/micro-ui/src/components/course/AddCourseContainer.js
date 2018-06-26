@@ -9,7 +9,7 @@ import CourseForm from './CourseForm'; // eslint-disable-line import/no-named-as
 import { authorsFormattedForDropdown } from '../../selectors/selectors'; // eslint-disable-line import/no-named-as-default
 import { withAuth } from '@okta/okta-react';
 
-export class AddOrEditCourseContainer extends React.Component {
+export class AddCourseContainer extends React.Component {
 
 
     constructor() {
@@ -108,7 +108,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 
-AddOrEditCourseContainer.propTypes = {
+AddCourseContainer.propTypes = {
     action: PropTypes.object.isRequired,
     history: PropTypes.object,
     authors: PropTypes.array,
@@ -118,4 +118,4 @@ AddOrEditCourseContainer.propTypes = {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(AddOrEditCourseContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(AddCourseContainer));
