@@ -35,7 +35,7 @@ class App extends React.Component{
                                 <Route path="/implicit/callback" component={ImplicitCallback} />
                                 <SecureRoute exact path="/add_edit" component={AddOrEditCourseContainer} />
                                 <SecureRoute path="/add_edit/:id" component={AddOrEditCourseContainer} />
-                                <Route component={CourseListContainer} />
+                                <SecureRoute component={CourseListContainer} />
                             </Switch>
     
                         </div>

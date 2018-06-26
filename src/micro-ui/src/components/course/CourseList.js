@@ -36,7 +36,6 @@ class CourseList extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.options = {
             sortIndicator: true,
             noDataText: 'No data'
@@ -71,27 +70,25 @@ class CourseList extends React.Component {
 
 
     render() {
-        const columns = [{
-                    dataField: 'id',
-                    text: 'ID',
-                    hidden: true
-                }, {
-                    dataField: 'title',
-                    text: 'Title'
-                }, {
-                    dataField: 'length',
-                    text: 'Length'
-                 },{
-                    dataField: 'category',
-                    text: 'Category'
-                 },{
-                    dataField: 'authorId',
-                    text: 'Author'
-                 },{
-                    dataField: '',
-                    text: 'Actions',
-                    formatter : this.actionFormatter 
-                 }];
+       
+        let dataList =  this.props.courses, dataFields, columns = [{
+            dataField: '',
+            text: 'Actions',
+            formatter : this.actionFormatter 
+         }];
+        if(dataList && dataList.length){
+            dataFields = Object.keys(dataList[0]);
+        }
+        if(dataFields){
+           
+            columns=[...(dataFields.map(dataField=>{
+                    return {'dataField': dataField, 'text': dataField}
+                })), {
+                dataField: '',
+                text: 'Actions',
+                formatter : this.actionFormatter 
+             }];
+        }
 
         return (
             <BootstrapTable data={this.props.courses} columns={columns} keyField="id" bordered={false} striped condensed />

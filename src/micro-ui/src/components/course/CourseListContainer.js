@@ -11,11 +11,6 @@ import { withAuth } from '@okta/okta-react';
 
 export class CourseListContainer extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {selectedCourseId: undefined};
-    }
-
 
     async componentDidMount() {
         await this.props.action.checkAuthentication(this.props.auth);
