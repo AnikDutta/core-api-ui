@@ -315,6 +315,23 @@ class CourseApi {
         });
     }
 
+
+    static getJsonSchema() {
+      return new Promise((resolve,reject) => {
+          axios.get(`http://localhost:12040/aircraft-service/1.0/aircrafts`).then(res => {
+              if(res && res.data && res.data.length){
+                let dataFields = Object.keys(res.data[0]);
+                resolve(dataFields);
+              }else{
+                reject();
+              }
+          }).catch(error => {
+              throw error;
+          })
+      });
+      //return axios.get(`http://localhost:12040/aircraft-service/1.0/aircraft-schema`);
+  }
+
 }
 
 export default CourseApi;

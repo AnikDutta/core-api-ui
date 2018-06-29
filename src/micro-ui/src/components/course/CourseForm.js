@@ -5,42 +5,19 @@ import FieldInput from '../common/FieldInput';
 import SelectInput from '../common/SelectInput';
 
 
-export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading, authors, handleSave, handleCancel }) => {
+export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading, authors, handleSave, handleCancel , fields }) => {
     return (
         <form onSubmit={handleSubmit(handleSave)}>
             <h1>{heading}</h1>
-
-            <Field
-                type="text"
-                name="title"
-                label="Title"
-                placeholder="Title of the course"
-                component={FieldInput}
-            />
-
-            <Field
-                name="authorId"
-                label="Author"
-                options={authors}
-                component={SelectInput}
-            />
-
-            <Field
-                type="text"
-                name="category"
-                label="Category"
-                placeholder="Category of the course"
-                component={FieldInput}
-            />
-
-            <Field
-                type="text"
-                name="length"
-                label="Length"
-                placeholder="Lenght of course in minutes or hours"
-                component={FieldInput}
-            />
-
+            {fields.map((field, index)=>(
+                <Field
+                    type="text"
+                    name="title"
+                    label="Title"
+                    placeholder="Title of the course"
+                    component={FieldInput}
+                />
+            ))}
             <div>
                 <button type="submit" disabled={submitting} className="btn btn-primary"><i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit</button>
 

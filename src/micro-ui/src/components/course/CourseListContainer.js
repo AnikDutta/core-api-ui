@@ -44,14 +44,14 @@ export class CourseListContainer extends React.Component {
     render() {
         const { courses } = this.props;
         console.log(`Course List after Render`,this.props.courses);
-        if (!courses) {
+        if (!(courses && courses.length)) {
             return (
                 <div>Loading...</div>
             );
         }
 
         return (
-            <div className="container-fluid">
+           <div className="container-fluid">
                 <div className="row mt-3">
                     <div className="col">
                         <h1>Courses</h1>                        

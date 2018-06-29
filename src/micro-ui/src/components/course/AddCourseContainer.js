@@ -8,7 +8,7 @@ import * as authorAction from '../../action/AuthorAction';
 import CourseForm from './CourseForm'; // eslint-disable-line import/no-named-as-default
 import { authorsFormattedForDropdown } from '../../selectors/selectors'; // eslint-disable-line import/no-named-as-default
 import { withAuth } from '@okta/okta-react';
-
+import CourseApi from '../../api/CourseApi';
 export class AddCourseContainer extends React.Component {
 
 
@@ -21,16 +21,13 @@ export class AddCourseContainer extends React.Component {
 
 
      componentDidMount() {
-        this.props.action.getCourseAction(this.props.match.params.id)
+        /*this.props.action.getCourseAction(this.props.match.params.id)
             .catch(error => {
                 toastr.error(error);
-            });
-
-        this.props.action.getAuthorsAction()
-            .catch(error => {
-                toastr.error(error);
-            });
-        
+            }); */
+        CourseApi.getJsonSchema().then(res=>{
+            console.log(`JSON Schema`,res);
+        })
     }
 
     componentDidUpdate() {
@@ -77,6 +74,7 @@ export class AddCourseContainer extends React.Component {
                     handleSave={this.handleSave}
                     handleCancel={this.handleCancel}
                     initialValues={this.props.initialValues}
+                    fields = {[1,2]}
                 />
             </div>
         );
