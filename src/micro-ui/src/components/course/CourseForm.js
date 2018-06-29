@@ -12,9 +12,9 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
             {fields.map((field, index)=>(
                 <Field
                     type="text"
-                    name="title"
-                    label="Title"
-                    placeholder="Title of the course"
+                    name={field.dataField}
+                    label={field.text}
+                    placeholder={field.text}
                     component={FieldInput}
                 />
             ))}

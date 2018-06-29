@@ -14,6 +14,7 @@ export class AddCourseContainer extends React.Component {
 
     constructor() {
         super();
+        this.state = {fields : []};
         this.handleSave = this.handleSave.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
     }
@@ -27,6 +28,7 @@ export class AddCourseContainer extends React.Component {
             }); */
         CourseApi.getJsonSchema().then(res=>{
             console.log(`JSON Schema`,res);
+            this.setState({fields: res});
         })
     }
 
@@ -74,7 +76,7 @@ export class AddCourseContainer extends React.Component {
                     handleSave={this.handleSave}
                     handleCancel={this.handleCancel}
                     initialValues={this.props.initialValues}
-                    fields = {[1,2]}
+                    fields = {this.state.fields}
                 />
             </div>
         );

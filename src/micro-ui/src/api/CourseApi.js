@@ -321,7 +321,12 @@ class CourseApi {
           axios.get(`http://localhost:12040/aircraft-service/1.0/aircrafts`).then(res => {
               if(res && res.data && res.data.length){
                 let dataFields = Object.keys(res.data[0]);
-                resolve(dataFields);
+
+                
+
+                resolve(dataFields.map(dataField=>{
+                  return {'dataField': dataField, 'text': dataField.toUpperCase()}
+                }));
               }else{
                 reject();
               }
